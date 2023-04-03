@@ -1,104 +1,100 @@
 import React, { useState } from 'react';
-import {StyleSheet, Text, View, Pressable,Image,FlatList,Button,onPress} from 'react-native';
- 
-const option="vaonlcteis";
-const letter=option.split('');
-const answer="native";
-const answerS=answer.split('');
-const img = {uri: 'https://reactjs.org/logo-og.png'};
+import {
+  StyleSheet,
+  Text,
+  View,
+  Pressable,
+  Image,
+  Alert,
+} from 'react-native';
 
-// const Box = ({ letter, onPress }) => {
-//   return (
-//     <TouchableOpacity onPress={onPress}>
-//       <View style={{ 
-//         width: 50, 
-//         height: 50, 
-//         borderRadius: 10, 
-//         backgroundColor: '#f2f2f2', 
-//         justifyContent: 'center',  
-//         alignItems: 'center' 
-//       }}>
-//         <Text>{letter}</Text>
-//       </View>
-//     </TouchableOpacity>
-//   );
-// }
-const OptionBoxes = () => {
-  const boxes = [];
-  for (let i = 0; i < option.length; i++) {
-    boxes.push(
-      <View key={i} style={styles.box}>
-         {/* <Pressable
-            onPress={() => setSelectedLetter(letter[i])}> */}
-        <Text style={styles.alphabets}>{letter[i]}</Text>
-         {/* </Pressable> */}
-      </View>
-    );
-  }
-  console.log(letter);
-  return boxes;
-};
-const AnswerBoxes = () => {
-  const boxes = [];
-  for (let i = 0; i < answer.length; i++) {
-    boxes.push(
-      <View key={i} style={styles.box}>
-        {/* <Text style={styles.alphabets}>{selectedLetter}</Text> */}
-      </View>
-    );
-  }
-  console.log(letter);
-  return boxes;
+const option = 'vaonlcteis';
+const answer = 'native';
+
+const OptionBoxes = ({ onPress }) => {
+  const letter = option.split('');
+
+  return (
+    <View style={styles.letters}>
+      {letter.map((l, i) => (
+        <Pressable key={i} onPress={() => onPress(l)}>
+          <View style={styles.box}>
+            <Text style={styles.alphabets}>{l}</Text>
+          </View>
+        </Pressable>
+      ))}
+    </View>
+  );
 };
 
-// const img1 = {uri: './src/assets/Splashscreen.PNG'};
+const AnswerBoxes = ({ letters, onPress }) => {
+  return (
+    <View style={styles.letters}>
+      {letters.map((l, i) => (
+        <Pressable key={i} onPress={() => onPress(i)}>
+          <View style={[styles.box, styles.answerBox]}>
+            <Text style={styles.alphabets}>{l || ''}</Text>
+          </View>
+        </Pressable>
+      ))}
+    </View>
+  );
+};
 
-const Play = ({ navigation }) =>  {
-  const [selectedLetter, setSelectedLetter] = useState('');
-  const handleBoxPress = (letter) => {
-    setSelectedLetter(letter);
-  }
+const Play = () => {
+  const [letters, setLetters] = useState(new Array(answer.length).fill(null));
+
+  const handleOptionPress = (letter) => {
+    // Find the first empty slot in the answer boxes
+    const index = letters.findIndex((l) => l === null);
+
+    // Update the letters state with the selected letter
+    if (index !== -1) {
+      const newLetters = [...letters];
+      newLetters[index] = letter;
+      setLetters(newLetters);
+
+      // If all letters have been filled, compare with the answer
+      if (newLetters.every(l => l !== null)) {
+        const guessedWord = newLetters.join('');
+        if (guessedWord === answer) {
+          Alert.alert('You guessed right!');
+        } else {
+          Alert.alert('Your guess is not accurate, try to guess again');
+        }
+      }
+    }
+  };
+
+  const handleAnswerPress = (index) => {
+    // Update the letters state by removing the letter at the specified index
+    const newLetters = [...letters];
+    newLetters[index] = null;
+    setLetters(newLetters);
+  };
 
   return (
     <View style={styles.container}>
-        <Text style={styles.titlename}>LEVEL 1</Text>
-        <View style={styles.container1}>
-            <Image
-                style={styles.stretch}
-                source = {img}
-            />
-            <Image
-                style={styles.stretch}
-                source = {img}
-            />
-        </View>
-        <View style={styles.container2}>
-            <Image
-                style={styles.stretch}
-                source = {img}
-            />
-            <Image
-                style={styles.stretch}
-                source = {img}
-            />
-        </View>
-       
-        <View style={styles.letters1}>
-      {AnswerBoxes()}
-    </View> 
-    
-         <View style={styles.letters}>
-      {OptionBoxes()}
-    </View> 
-         {/* <Pressable
-            onPress={() => navigation.navigate('Menu')}
-           style={{ padding: 10, marginBottom: 10, marginTop: 10 }}>
-           <Text style={styles.backbtn}>Back</Text>
-         </Pressable>  */}
+      <Text style={styles.titlename}>LEVEL 1</Text>
+      <View style={styles.container1}>
+        <Image style={styles.stretch} source={{ uri: 'https://reactjs.org/logo-og.png' }} />
+        <Image style={styles.stretch} source={{ uri: 'https://reactjs.org/logo-og.png' }} />
+      </View>
+      <View style={styles.container2}>
+        <Image style={styles.stretch} source={{ uri: 'https://reactjs.org/logo-og.png' }} />
+        <Image style={styles.stretch} source={{ uri: 'https://reactjs.org/logo-og.png' }} />
+      </View>
 
+      <View style={styles.letters1}>
+        <AnswerBoxes letters={letters} onPress={handleAnswerPress} />
+      </View>
+
+      <View style={styles.letters}>
+        <OptionBoxes onPress={handleOptionPress} />
+      </View>
     </View>
   );
-}; 
+};
 
 const styles = StyleSheet.create({
   container: {
