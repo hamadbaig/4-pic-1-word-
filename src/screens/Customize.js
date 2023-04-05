@@ -1,34 +1,69 @@
 import React, { useState } from 'react';
-import {StyleSheet, Text, View, Pressable,Image,FlatList,Button,TextInput} from 'react-native';
- 
+import {
+  StyleSheet,
+  Text,
+  View,
+  Pressable,
+  Image,
+  Button,
+  TextInput,
+  Alert,
+} from 'react-native';
+import ImagePicker from 'react-native-image-picker';
 
+const img = {
+  uri:
+    'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADMAAAAzCAYAAAA6oTAqAAAAEXRFWHRTb2Z0d2FyZQBwbmdjcnVzaEB1SfMAAABQSURBVGje7dSxCQBACARB+2/ab8BEeQNhFi6WSYzYLYudDQYGBgYGBgYGBgYGBgYGBgZmcvDqYGBgmhivGQYGBgYGBgYGBgYGBgYGBgbmQw+P/eMrC5UTVAAAAABJRU5ErkJggg==',
+};
 
-const img = {uri: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADMAAAAzCAYAAAA6oTAqAAAAEXRFWHRTb2Z0d2FyZQBwbmdjcnVzaEB1SfMAAABQSURBVGje7dSxCQBACARB+2/ab8BEeQNhFi6WSYzYLYudDQYGBgYGBgYGBgYGBgYGBgZmcvDqYGBgmhivGQYGBgYGBgYGBgYGBgYGBgbmQw+P/eMrC5UTVAAAAABJRU5ErkJggg=='};
-const Customize = ({ navigation }) =>  {
-    const [Answer, setAnswer] = useState('')
+const Customize = ({ navigation }) => {
+  const [Answer, setAnswer] = useState('');
+  const [selectedImage, setSelectedImage] = useState(null);
+
+  const handleImagePicker = () => {
+    if (ImagePicker) {
+      ImagePicker.launchImageLibrary({}, (response) => {
+        if (response.uri) {
+          setSelectedImage(response.uri);
+        }
+      });
+    }
+  };
 
   return (
     <View style={styles.container}>
-        <Text style={styles.titlename}>LEVEL 2</Text>
-        <View style={styles.container1}>
-            <Image
-                style={styles.stretch}
-                source = {img}
-            />
-            <Image
-                style={styles.stretch}
-                source = {img}
-            />
-        </View>
+      <Text style={styles.titlename}>ADD LEVELS</Text>
+      <View style={styles.container1}>
+        <Pressable onPress={handleImagePicker}>
+          <Image
+            key="image1"
+            style={styles.stretch}
+            source={selectedImage ? { uri: selectedImage } : img}
+          />
+        </Pressable>
+        <Pressable onPress={handleImagePicker}>
+          <Image
+            key="image2"
+            style={styles.stretch}
+            source={selectedImage ? { uri: selectedImage } : img}
+          />
+        </Pressable>
+      </View>
         <View style={styles.container2}>
-            <Image
-                style={styles.stretch}
-                source = {img}
-            />
-            <Image
-                style={styles.stretch}
-                source = {img}
-            />
+        <Pressable onPress={handleImagePicker}>
+          <Image
+            key="image3"
+            style={styles.stretch}
+            source={selectedImage ? { uri: selectedImage } : img}
+          />
+        </Pressable>
+        <Pressable onPress={handleImagePicker}>
+          <Image
+            key="image4"
+            style={styles.stretch}
+            source={selectedImage ? { uri: selectedImage } : img}
+          />
+        </Pressable>
         </View>
         <View style={styles.btn}>
         <TextInput style={styles.txtname}
