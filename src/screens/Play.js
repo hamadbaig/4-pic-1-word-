@@ -39,7 +39,7 @@ const AnswerBoxes = ({ letters, onPress }) => {
       ))}
     </View>
   );
-};
+}; 
 
 const Play = () => {
   const [letters, setLetters] = useState(new Array(answer.length).fill(null));
