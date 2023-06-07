@@ -1,186 +1,322 @@
-import React, { useState } from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-  Pressable,
-  Image,
-  Alert,
-} from 'react-native';
 
-const option = 'vaonlcteis';
-const answer = 'native';
+// export default Play; 
+// // const OptionBoxes = ({ onPress }) => {
+// //   const letter = option.split('');
 
-const OptionBoxes = ({ onPress }) => {
-  const letter = option.split('');
+// //   return (
+// //     <View style={styles.letters}>
+// //       {letter.map((l, i) => (
+// //         <Pressable key={i} onPress={() => onPress(l)}>
+// //           <View style={styles.box}>
+// //             <Text style={styles.alphabets}>{l}</Text>
+// //           </View>
+// //         </Pressable>
+// //       ))}
+// //     </View>
+// //   );
+// // };
 
-  return (
-    <View style={styles.letters}>
-      {letter.map((l, i) => (
-        <Pressable key={i} onPress={() => onPress(l)}>
-          <View style={styles.box}>
-            <Text style={styles.alphabets}>{l}</Text>
-          </View>
-        </Pressable>
-      ))}
-    </View>
-  );
-};
+// // const AnswerBoxes = ({ letters, onPress }) => {
+// //   return (
+// //     <View style={styles.letters}>
+// //       {letters.map((l, i) => (
+// //         <Pressable key={i} onPress={() => onPress(i)}>
+// //           <View style={[styles.box, styles.answerBox]}>
+// //             <Text style={styles.alphabets}>{l || ''}</Text>
+// //           </View>
+// //         </Pressable>
+// //       ))}
+// //     </View>
+// //   );
+// // }; 
+// // const AnswerBoxes = ({ letters, answer, onPress }) => {
+// //   return (
+// //     <View style={styles.letters}>
+// //       {letters.map((l, i) => (
+// //         <Pressable key={i} onPress={() => onPress(i)}>
+// //           <View style={[styles.box, styles.answerBox]}>
+// //             <Text style={styles.alphabets}>{l || answer[i] || ''}</Text>
+// //           </View>
+// //         </Pressable>
+// //       ))}
+// //     </View>
+// //   );
+// // };
 
-const AnswerBoxes = ({ letters, onPress }) => {
-  return (
-    <View style={styles.letters}>
-      {letters.map((l, i) => (
-        <Pressable key={i} onPress={() => onPress(i)}>
-          <View style={[styles.box, styles.answerBox]}>
-            <Text style={styles.alphabets}>{l || ''}</Text>
-          </View>
-        </Pressable>
-      ))}
-    </View>
-  );
-}; 
 
-const Play = () => {
-  const [letters, setLetters] = useState(new Array(answer.length).fill(null));
+// // const Play = () => {
+// //   const [data, setData] = useState([]);
 
-  const handleOptionPress = (letter) => {
-    // Find the first empty slot in the answer boxes
-    const index = letters.findIndex((l) => l === null);
+// //   const [letters, setLetters] = useState(new Array(answer.length).fill(null));
+// //   useEffect(() => {
+// //     const db = SQLite.openDatabase({ name: 'FourPicOneWord.db', createFromLocation: '~FourPicOneWord.db' });
 
-    // Update the letters state with the selected letter
-    if (index !== -1) {
-      const newLetters = [...letters];
-      newLetters[index] = letter;
-      setLetters(newLetters);
+// //     db.transaction(tx => {
+// //       tx.executeSql('SELECT * FROM Levels WHERE id = 0', [], (_, { rows }) => {
+// //         const retrievedData = rows.raw();
+// //         setData(retrievedData);
+// //         console.log(retrievedData);
+// //       });
+// //     });
+// //   }, );
 
-      // If all letters have been filled, compare with the answer
-      if (newLetters.every(l => l !== null)) {
-        const guessedWord = newLetters.join('');
-        if (guessedWord === answer) {
-          Alert.alert('You guessed right!');
-        } else {
-          Alert.alert('Your guess is not accurate, try to guess again');
+
+// //   const handleOptionPress = (letter) => {
+// //     // Find the first empty slot in the answer boxes
+// //     const index = letters.findIndex((l) => l === null);
+
+// //     // Update the letters state with the selected letter
+// //     if (index !== -1) {
+// //       const newLetters = [...letters];
+// //       newLetters[index] = letter;
+// //       setLetters(newLetters);
+
+// //       // If all letters have been filled, compare with the answer
+// //       if (newLetters.every(l => l !== null)) {
+// //         const guessedWord = newLetters.join('');
+// //         if (guessedWord === answer) {
+// //           Alert.alert('You guessed right!');
+// //         } else {
+// //           Alert.alert('Your guess is not accurate, try to guess again');
+// //         }
+// //       }
+// //     }
+// //   };
+
+ 
+// //   const handleAnswerPress = (index) => {
+// //     // Update the letters state by removing the letter at the specified index
+// //     const newLetters = [...letters];
+// //     newLetters[index] = null;
+// //     setLetters(newLetters);
+// //   };
+
+
+//   // const [letters, setLetters] = useState(new Array(answer.length).fill(null));
+ 
+//   // const handleOptionPress = (letter) => {
+//   //   // Find the first empty slot in the answer boxes
+//   //   const index = letters.findIndex((l) => l === null);
+
+//   //   // Update the letters state with the selected letter
+//   //   if (index !== -1) {
+//   //     const newLetters = [...letters];
+//   //     newLetters[index] = letter;
+//   //     setLetters(newLetters);
+
+//   //     // If all letters have been filled, compare with the answer
+//   //     if (newLetters.every(l => l !== null)) {
+//   //       const guessedWord = newLetters.join('');
+//   //       if (guessedWord === answer) {
+//   //         Alert.alert('You guessed right!');
+//   //       } else {
+//   //         Alert.alert('Your guess is not accurate, try to guess again');
+//   //       }
+//   //     }
+//   //   }
+//   // };
+
+//   // const handleAnswerPress = (index) => {
+//   //   // Update the letters state by removing the letter at the specified index
+//   //   const newLetters = [...letters];
+//   //   newLetters[index] = null;
+//   //   setLetters(newLetters);
+// //   // };
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, Text, View, Pressable, Image, Alert } from 'react-native';
+import { RadioButton } from 'react-native-paper';
+import SQLite from "react-native-sqlite-storage";
+
+
+// const UserId = 1;
+const answer = 'Native';
+
+let db = SQLite.openDatabase({ name: 'FourPicOneWordgame.db' });
+
+const Play = ({ navigation }) => {
+  const [userlist, setuserlist] = useState(null);
+  const [selectedValue, setSelectedValue] = useState('');
+  const [UserId, setUserId] = useState(1);
+
+
+  // useEffect(() => {
+   
+  //   db.transaction((tx) => {
+  //     tx.executeSql(
+  //       'SELECT * FROM Levels where id = ?',
+  //       [UserId],
+  //       (tx, results) => {
+  //         var len = results.rows.length;
+  //         if (len > 0) {
+  //           setuserlist(results.rows.item(0));
+  //         } else {
+  //           alert('No user found');
+  //         }
+  //       }
+  //     );
+  //   });
+  // }, []);
+  useEffect(() => {
+    if (UserId === 0) {
+      // If UserId is 0, increment the value by 1
+      const newUserId = UserId + 1;
+      setUserId(newUserId);
+    }
+  
+    // Fetch the user from the database based on the updated UserId
+    db.transaction((tx) => {
+      tx.executeSql(
+        'SELECT * FROM Levels WHERE id = ?',
+        [UserId],
+        (tx, results) => {
+          var len = results.rows.length;
+          if (len > 0) {
+            setuserlist(results.rows.item(0));
+          } else {
+            alert('No user found');
+          }
         }
-      }
+      );
+    });
+  }, []);
+  
+  const handleRadioPress = (option) => {
+    setSelectedValue(option);
+  };
+
+  const checkAnswer = () => {
+    if (selectedValue === userlist.answer) {
+      Alert.alert(
+        'Correct Answer',
+        'Your answer is correct! Do you want to play next?',
+        [
+          {
+            text: 'Cancel',
+            style: 'cancel',
+          },
+          {
+            text: 'Next',
+            onPress: handleNextQuestion,
+          },
+        ]
+      );
+    } else {
+      Alert.alert('Incorrect Answer', 'Sorry, your answer is incorrect.');
     }
   };
 
-  const handleAnswerPress = (index) => {
-    // Update the letters state by removing the letter at the specified index
-    const newLetters = [...letters];
-    newLetters[index] = null;
-    setLetters(newLetters);
+  const handleNextQuestion = () => {
+    setUserId((prevUserId) => prevUserId + 1);
+    setSelectedValue('');
+    
+    db.transaction((tx) => {
+      tx.executeSql(
+        'SELECT * FROM Levels where id = ?',
+        [UserId + 1],
+        (tx, results) => {
+          var len = results.rows.length;
+          if (len > 0) {
+            setuserlist(results.rows.item(0));
+          } else {
+            alert('No user found');
+          }
+        }
+      );
+    });
   };
+  
 
   return (
     <View style={styles.container}>
-      <Text style={styles.titlename}>LEVEL 1</Text>
+      <Text style={styles.titlename}>LEVEL {UserId}</Text>
       <View style={styles.container1}>
-        <Image style={styles.stretch} source={{ uri: 'https://reactjs.org/logo-og.png' }} />
-        <Image style={styles.stretch} source={{ uri: 'https://reactjs.org/logo-og.png' }} />
+        {userlist && (
+          <Image style={styles.stretch} source={{ uri: `data:image/png;base64,${userlist.image1}` }} />
+        )}
+        {userlist && (
+          <Image style={styles.stretch} source={{ uri: `data:image/png;base64,${userlist.image2}` }} />
+        )}
       </View>
       <View style={styles.container2}>
-        <Image style={styles.stretch} source={{ uri: 'https://reactjs.org/logo-og.png' }} />
-        <Image style={styles.stretch} source={{ uri: 'https://reactjs.org/logo-og.png' }} />
+        {userlist && (
+          <Image style={styles.stretch} source={{ uri: `data:image/png;base64,${userlist.image3}` }} />
+        )}
+        {userlist && (
+          <Image style={styles.stretch} source={{ uri: `data:image/png;base64,${userlist.image4}` }} />
+        )}
       </View>
 
-      <View style={styles.letters1}>
-        <AnswerBoxes letters={letters} onPress={handleAnswerPress} />
-      </View>
+      {userlist && (
+        <View style={styles.optionsContainer}>
+          <View style={styles.rowContainer}>
+            <RadioButton.Group onValueChange={handleRadioPress} value={selectedValue}>
+              <RadioButton.Item label={userlist.opt1} value={userlist.opt1} />
+              <RadioButton.Item label={userlist.opt2} value={userlist.opt2} />
+            </RadioButton.Group>
+          </View>
+          <View style={styles.rowContainer}>
+            <RadioButton.Group onValueChange={handleRadioPress} value={selectedValue}>
+              <RadioButton.Item label={userlist.opt3} value={userlist.opt3} />
+              <RadioButton.Item label={userlist.opt4} value={userlist.opt4} />
+            </RadioButton.Group>
+          </View>
+        </View>
+      )}
 
-      <View style={styles.letters}>
-        <OptionBoxes onPress={handleOptionPress} />
-      </View>
+      <Pressable onPress={checkAnswer} style={{ padding: 10, marginBottom: 10, marginTop: 10 }}>
+        <Text style={styles.signup}>Check Answer</Text>
+      </Pressable>
+
+      {/* <Pressable onPress={() => navigation.navigate('Menu')} style={{ padding: 10, marginBottom: 10 }}>
+        <Text style={styles.signup}>Back</Text>
+      </Pressable> */}
     </View>
   );
 };
 
+
 const styles = StyleSheet.create({
   container: {
-    paddingTop:50,
-    paddingLeft:10,
-    backgroundColor: '#2f4f4f',
-    flex:1
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#fff',
   },
- 
   container1: {
-     paddingTop:50,
-    paddingLeft:20,
-    backgroundColor: '#2f4f4f',
-    flex:3,
-    flexDirection:'row',
-     justifyContent: 'space-between',
-     marginBottom:10,
-     marginRight:10,
-
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   container2: {
-    // paddingTop:50,
-    paddingLeft:20,
-    backgroundColor: '#2f4f4f',
-    flex:5,
-    flexDirection:'row',
-     justifyContent: 'space-between',
-     marginRight:10,
-
-  },
-  
-  backbtn: {
-    color: 'white',
-    fontSize: 24,
-    fontWeight: 'bold',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
     marginTop: 20,
-    textAlign: 'center',
-    height: 45,
-    width: 350,
-    borderBottomWidth: 1,
-    backgroundColor: '#7fff00',
-    marginLeft: 20,
-    borderRadius: 70,
   },
   stretch: {
-    width: 150,
-    height: 100,
+    width: 120,
+    height: 120,
+    resizeMode: 'stretch',
+    margin: 10,
   },
   titlename: {
-    color: '#ffffff',
-    textAlign: 'center',
-    fontSize: 38,
+    fontSize: 30,
     fontWeight: 'bold',
+    marginBottom: 20,
   },
-  letters: {
-    flexDirection: 'row', // boxes will be in a row
-    justifyContent: 'center', // boxes will be centered horizontally
-    alignItems: 'center', // boxes will be centered vertically
-    flexWrap: 'wrap',
-
-     // boxes will wrap to next row if necessary
+  optionsContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
   },
-  letters1: {
-    flexDirection: 'row', // boxes will be in a row
-    justifyContent: 'center', // boxes will be centered horizontally
-    alignItems: 'center', // boxes will be centered vertically
-    flexWrap: 'wrap',
-    flex:1
-
-     // boxes will wrap to next row if necessary
+  rowContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
-  box: {
-    width: 40,
-    height: 30,
-    margin: 5,
-    backgroundColor: 'blue',
-    aspectRatio:1,
-  },
-  alphabets: {
+  signup: {
+    color: '#000',
+    fontWeight: 'bold',
     fontSize: 18,
-    fontWeight: 'bold',
-    color: 'white',
-    textAlign: 'center',
-
-
   },
 });
-
-export default Play; 
+export default Play;

@@ -1,43 +1,65 @@
-import React, { useState } from 'react';
-import {StyleSheet, Text, View, Pressable} from 'react-native';
- 
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, Text, View, Pressable } from 'react-native';
 
-const Menu  = ({ navigation }) =>  {
-  
+// useEffect(() => {
+//   db.transaction((txn) => {
+//     txn.executeSql(
+//       "SELECT name FROM sqlite_master WHERE type='table' AND name='level'",
+//       [],
+//       (tx, res) => {
+//         console.log('item:', res.rows.length);
+//         if (res.rows.length == 0) {
+//           txn.executeSql('DROP TABLE IF EXISTS level', []);
+//           txn.executeSql(
+//             'CREATE TABLE IF NOT EXISTS level(id INTEGER PRIMARY KEY AUTOINCREMENT, user_name VARCHAR(20), user_contact INT(10), user_address VARCHAR(255))',
+//             []
+//           );
+//         }
+//       }
+//     );
+//   });
+// }, []);
+const Menu = ({ navigation }) => {
+
   return (
     <View style={styles.container}>
       <Text style={styles.titlename}>4 PIC 1 WORD</Text>
       <Pressable
-           onPress={() => navigation.navigate('Play')}
-           style={{ padding: 10, marginBottom: 10, marginTop: 10 }}>
-           <Text style={styles.signup}>Lets Play</Text>
-         </Pressable>
-         <Pressable
-          //  onPress={() => navigation.navigate('signup')}
-           style={{ padding: 10, marginBottom: 10, marginTop: 10 }}>
-           <Text style={styles.signup}>Level</Text>
-         </Pressable>
-         <Pressable
-           onPress={() => navigation.navigate('Customize')}
-           style={{ padding: 10, marginBottom: 10, marginTop: 10 }}>
-           <Text style={styles.signup}>Customize</Text>
-         </Pressable>
-         <Pressable
-          //  onPress={() => navigation.navigate('signup')}
-           style={{ padding: 10, marginBottom: 10, marginTop: 10 }}>
-           <Text style={styles.signup}>Exit</Text>
-         </Pressable>
-    
-      
-       
+        onPress={() => navigation.navigate('Play')}
+        style={{ padding: 10, marginBottom: 10, marginTop: 10 }}>
+        <Text style={styles.signup}>Lets Play</Text>
+      </Pressable>
+      <Pressable
+         onPress={() => navigation.navigate('Level')}
+        style={{ padding: 10, marginBottom: 10, marginTop: 10 }}>
+        <Text style={styles.signup}>Level</Text>
+      </Pressable>
+      <Pressable
+        onPress={() => navigation.navigate('Customize')}
+        style={{ padding: 10, marginBottom: 10, marginTop: 10 }}>
+        <Text style={styles.signup}>Customize</Text>
+      </Pressable>
+      <Pressable
+        onPress={() => navigation.navigate('Updatescreen')}
+        style={{ padding: 10, marginBottom: 10, marginTop: 10 }}>
+        <Text style={styles.signup}>Updat level</Text>
+      </Pressable>
+      <Pressable
+        //  onPress={() => navigation.navigate('signup')}
+        style={{ padding: 10, marginBottom: 10, marginTop: 10 }}>
+        <Text style={styles.signup}>Exit</Text>
+      </Pressable>
+
+
+
 
     </View>
   );
-}; 
+};
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#2f4f4f',
+    backgroundColor: '#38424C',
     flex: 1
   },
   titlename: {
@@ -67,7 +89,7 @@ const styles = StyleSheet.create({
     width: 350,
     borderBottomWidth: 1,
     paddingHorizontal: 20,
-    borderColor:'#ffffff',
+    borderColor: '#ffffff',
     fontSize: 20,
     borderRadius: 70,
     marginTop: 150,
@@ -84,7 +106,7 @@ const styles = StyleSheet.create({
     borderRadius: 70,
     marginTop: 10,
     marginLeft: 20,
-    borderColor:'#ffffff',
+    borderColor: '#ffffff',
   },
   forgot: {
     color: 'black',
