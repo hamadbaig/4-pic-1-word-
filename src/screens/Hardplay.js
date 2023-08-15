@@ -133,7 +133,7 @@ const answer = 'Native';
 
 let db = SQLite.openDatabase({ name: 'FourPicOneWordgame.db' });
 
-const Play = ({ navigation }) => {
+const Hardplay = ({ navigation }) => {
   const [userlist, setuserlist] = useState(null);
   const [selectedValue, setSelectedValue] = useState('');
   const [UserId, setUserId] = useState(1);
@@ -169,7 +169,7 @@ const Play = ({ navigation }) => {
     // Fetch the user from the database based on the updated UserId
     db.transaction((tx) => {
       tx.executeSql(
-        'SELECT * FROM Levels WHERE id = ?',
+        'SELECT * FROM Hard WHERE id = ?',
         [UserId],
         (tx, results) => {
           var len = results.rows.length;
@@ -188,13 +188,13 @@ const Play = ({ navigation }) => {
       //   },
       // ]);
       alert('no more questions',
-      [
+      // [
        
-        {
-          text: 'reset',
-          onPress: resetvalue,
-        },
-      ]
+      //   {
+      //     text: 'reset',
+      //     onPress: resetvalue,
+      //   },
+      // ]
       );
           }
         }
@@ -246,7 +246,7 @@ const Play = ({ navigation }) => {
     
   }; 
   const foam = () => {
-    alert('                 Easy level score'+"\n"+"\n"+"\n"+'All Right Attempts: '+ right +"\n"+"\n"+'All wrongAttempts: '+wrong,
+    alert('                 Hard level score'+"\n"+"\n"+"\n"+'All Right Attempts: '+ right +"\n"+"\n"+'All wrongAttempts: '+wrong,
      
     );
  
@@ -254,20 +254,22 @@ const Play = ({ navigation }) => {
    };
  
   const handleNextQuestion = () => {
+    setright((prevright) => right + 1);
+
     setUserId((prevUserId) => prevUserId + 1);
     setSelectedValue('');
-    setright((prevright) => right + 1);
     // setSelectedValue('');
     console.log('right',right)
     
     db.transaction((tx) => {
       tx.executeSql(
-        'SELECT * FROM Levels where id = ?',
+        'SELECT * FROM Hard where id = ?',
         [UserId + 1],
         (tx, results) => {
           var len = results.rows.length;
           if (len > 0) {
             setuserlist(results.rows.item(0));
+          
           } else {
       //        Alert.alert('right: '+ right +"\n"+'wrong: '+wrong,
       // [
@@ -291,15 +293,16 @@ const Play = ({ navigation }) => {
   };
  
   const handlewrongQuestion = () => {
+    setwrong((prevwrong) => wrong + 1);
+
     setUserId((prevUserId) => prevUserId + 1);
     setSelectedValue('');
-    setwrong((prevwrong) => wrong + 1);
     // setSelectedValue('');
     console.log('wrong: ',wrong)
     
     db.transaction((tx) => {
       tx.executeSql(
-        'SELECT * FROM Levels where id = ?',
+        'SELECT * FROM Hard where id = ?',
         [UserId + 1],
         (tx, results) => {
           var len = results.rows.length;
@@ -307,6 +310,7 @@ const Play = ({ navigation }) => {
             setuserlist(results.rows.item(0));
           } else {
            
+            // alert('right: '+ (right+1) +"\n"+'wrong: '+(wrong+1),
             alert('no more questions',
             [
               // {
@@ -472,4 +476,4 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
 });
-export default Play;
+export default Hardplay;

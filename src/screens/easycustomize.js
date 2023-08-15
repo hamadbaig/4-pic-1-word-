@@ -19,37 +19,27 @@ import { StyleSheet, Text, View, Pressable } from 'react-native';
 //     );
 //   });
 // }, []);
-const Menu = ({ navigation }) => {
+const easycustomize = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
       <Text style={styles.titlename}>4 PIC 1 WORD</Text>
       <Pressable
-        onPress={() => navigation.navigate('easy')}
+        onPress={() => navigation.navigate('Customize')}
         style={{ padding: 10, marginBottom: 10, marginTop: 10 }}>
-        <Text style={styles.signup}>Lets Play</Text>
+        <Text style={styles.signup}>EASY</Text>
       </Pressable>
       <Pressable
-         onPress={() => navigation.navigate('multilevel')}
+         onPress={() => navigation.navigate('mediumcustomize')}
         style={{ padding: 10, marginBottom: 10, marginTop: 10 }}>
-        <Text style={styles.signup}>Level</Text>
+        <Text style={styles.signup}>Medium</Text>
       </Pressable>
       <Pressable
-        onPress={() => navigation.navigate('easycustomize')}
+        onPress={() => navigation.navigate('hardcustomize')}
         style={{ padding: 10, marginBottom: 10, marginTop: 10 }}>
-        <Text style={styles.signup}>Parent Module</Text>
+        <Text style={styles.signup}>hard</Text>
       </Pressable>
-      <Pressable
-        onPress={() => navigation.navigate('Updatescreen')}
-        style={{ padding: 10, marginBottom: 10, marginTop: 10 }}>
-        <Text style={styles.signup}>Updat level</Text>
-      </Pressable>
-      <Pressable
-        //  onPress={() => navigation.navigate('signup')}
-        style={{ padding: 10, marginBottom: 10, marginTop: 10 }}>
-        <Text style={styles.signup}>Exit</Text>
-      </Pressable>
-
+      
 
 
 
@@ -144,4 +134,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Menu;
+export default easycustomize;

@@ -207,7 +207,7 @@ const img = {
   uri:
     'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADMAAAAzCAYAAAA6oTAqAAAAEXRFWHRTb2Z0d2FyZQBwbmdjcnVzaEB1SfMAAABQSURBVGje7dSxCQBACARB+2/ab8BEeQNhFi6WSYzYLYudDQYGBgYGBgYGBgYGBgYGBgZmcvDqYGBgmhivGQYGBgYGBgYGBgYGBgYGBgbmQw+P/eMrC5UTVAAAAABJRU5ErkJggg==',
 };
-const Customize = ({ navigation }) => {
+const hardcustomize = ({ navigation }) => {
   const [Answer, setAnswer] = useState('');
   const [opt1, setopt1] = useState('');
   const [opt2, setopt2] = useState('');
@@ -261,7 +261,6 @@ const Customize = ({ navigation }) => {
         function (tx, res) {
           console.log('item:', res.rows.length);
           if (res.rows.length == 0) {
-             
             txn.executeSql('DROP TABLE IF EXISTS Medium', []);
             txn.executeSql(
               'CREATE TABLE IF NOT EXISTS Medium (id INTEGER PRIMARY KEY AUTOINCREMENT, answer TEXT, opt1 TEXT, opt2 TEXT, opt3 TEXT, opt4 TEXT, image1 BLOB, image2 BLOB, image3 BLOB, image4 BLOB)', [],
@@ -270,7 +269,7 @@ const Customize = ({ navigation }) => {
           }
         },
       );
-      txn.executeSql( 
+      txn.executeSql(
         "SELECT name FROM sqlite_master WHERE type='table' AND name='Hard'",
         [],
         function (tx, res) {
@@ -296,7 +295,7 @@ const Customize = ({ navigation }) => {
 
     db.transaction((tx) => {
       tx.executeSql(
-        'INSERT INTO Levels (answer, opt1, opt2, opt3, opt4, image1, image2, image3, image4) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
+        'INSERT INTO Hard (answer, opt1, opt2, opt3, opt4, image1, image2, image3, image4) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
         [Answer, opt1, opt2, opt3, opt4, image1Base64, image2Base64, image3Base64, image4Base64],
         (tx, result) => {
           console.log('Results', result.rowsAffected);
@@ -503,4 +502,4 @@ const styles = StyleSheet.create({
 
 });
 
-export default Customize;
+export default hardcustomize;

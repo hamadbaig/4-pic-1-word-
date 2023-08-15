@@ -133,7 +133,7 @@ const answer = 'Native';
 
 let db = SQLite.openDatabase({ name: 'FourPicOneWordgame.db' });
 
-const Play = ({ navigation }) => {
+const Mediumplay = ({ navigation }) => {
   const [userlist, setuserlist] = useState(null);
   const [selectedValue, setSelectedValue] = useState('');
   const [UserId, setUserId] = useState(1);
@@ -169,7 +169,7 @@ const Play = ({ navigation }) => {
     // Fetch the user from the database based on the updated UserId
     db.transaction((tx) => {
       tx.executeSql(
-        'SELECT * FROM Levels WHERE id = ?',
+        'SELECT * FROM Medium WHERE id = ?',
         [UserId],
         (tx, results) => {
           var len = results.rows.length;
@@ -246,7 +246,7 @@ const Play = ({ navigation }) => {
     
   }; 
   const foam = () => {
-    alert('                 Easy level score'+"\n"+"\n"+"\n"+'All Right Attempts: '+ right +"\n"+"\n"+'All wrongAttempts: '+wrong,
+    alert('                 Medium level score'+"\n"+"\n"+"\n"+'All Right Attempts: '+ right +"\n"+"\n"+'All wrongAttempts: '+wrong,
      
     );
  
@@ -262,7 +262,7 @@ const Play = ({ navigation }) => {
     
     db.transaction((tx) => {
       tx.executeSql(
-        'SELECT * FROM Levels where id = ?',
+        'SELECT * FROM Medium where id = ?',
         [UserId + 1],
         (tx, results) => {
           var len = results.rows.length;
@@ -299,7 +299,7 @@ const Play = ({ navigation }) => {
     
     db.transaction((tx) => {
       tx.executeSql(
-        'SELECT * FROM Levels where id = ?',
+        'SELECT * FROM Medium where id = ?',
         [UserId + 1],
         (tx, results) => {
           var len = results.rows.length;
@@ -472,4 +472,4 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
 });
-export default Play;
+export default Mediumplay;

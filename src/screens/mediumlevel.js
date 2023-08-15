@@ -4,7 +4,7 @@ import { View, FlatList, Text, TouchableOpacity, Image } from 'react-native';
 import SQLite from 'react-native-sqlite-storage';
 let db = SQLite.openDatabase({ name: 'FourPicOneWordgame.db' });
 
-const Levelscreen = ({ navigation }) => {
+const mediumlevel = ({ navigation }) => {
   const [levels, setLevels] = useState([]);
 
   useEffect(() => {
@@ -14,7 +14,7 @@ const Levelscreen = ({ navigation }) => {
   const fetchLevels = () => {
     db.transaction((tx) => {
       tx.executeSql(
-        'SELECT * FROM Levels',
+        'SELECT * FROM Medium',
         [],
         (tx, result) => {
           const data = [];
@@ -55,4 +55,4 @@ const Levelscreen = ({ navigation }) => {
   );
 };
 
-export default Levelscreen;
+export default mediumlevel;
